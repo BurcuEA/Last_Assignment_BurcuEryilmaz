@@ -20,7 +20,7 @@ namespace Last_Assignment.Service.Services
 
             // PasswordHash alanı var ... // 37. video UserService 2:27 dk sn ... 
             //var user = new UserApp { Email = createUserDto.Email, UserName = createUserDto.UserName,PasswordHash };
-            var user = new UserApp { Email = createUserDto.Email, UserName = createUserDto.UserName };
+            var user = new UserApp { Email = createUserDto.Email, UserName = createUserDto.UserName,City=createUserDto.City }; // 43. video Postman Endpoint  işlemi kısmında hata verdiği için City=createUserDto.City ekledik 
 
             var result = await _userManager.CreateAsync(user, createUserDto.Password);
 

@@ -12,5 +12,6 @@ namespace Last_Assignment.Core.DTOs
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string City { get; set; } // 43. video Postman Endpoint  işlemi kısmında hata verdiği için ekledik
     }
 }

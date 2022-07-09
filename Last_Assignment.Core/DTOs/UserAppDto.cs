@@ -11,7 +11,7 @@ namespace Last_Assignment.Core.DTOs
     // Entity leri dış dünyaya açmak istemiyoruz,Client lar entitiyler üzerinde bilgi sahibi olmasın diye sarmallıyoruz,ihtiyaç olan property ler görünsün
     public class UserAppDto
     {
-        public string Id { get; set; }
+        public string Id { get; set; } // string olacak doğru yani dikkat et 
         public string UserName { get; set; }
         public string Email { get; set; }
         public string City { get; set; } // bunu biz eklemiştik

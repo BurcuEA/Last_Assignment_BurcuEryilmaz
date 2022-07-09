@@ -53,6 +53,7 @@ builder.Services.AddDbContext<AppDbContext>(x =>
      });
 
 });
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // üyelik sistemi ile ilgili kýsým....
 //Identity Role ekleme ... ÖNEMLÝÝ... // 38. video Start Up 1  13:17 dk sn ... (E) UserApp olduðu class a git ..
@@ -183,6 +184,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication(); //  42. video UserController 7:23 dk sn ... sýrasý önemli ...
 app.UseAuthorization();
 
 app.MapControllers();
