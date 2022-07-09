@@ -33,7 +33,7 @@ namespace Last_Assignment.Data.Repository
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)
             {
-                _context.Entry(entity).State = EntityState.Detached;
+                _context.Entry(entity).State = EntityState.Detached; // bunu memory den at demişiz ..(A)
             }
             return entity;
         }
