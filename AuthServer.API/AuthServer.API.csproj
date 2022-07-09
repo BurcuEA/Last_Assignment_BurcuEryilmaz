@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Last_Assignment.Core\Last_Assignment.Core.csproj" />
+    <ProjectReference Include="..\Last_Assignment.Service\Last_Assignment.Service.csproj" />
     <ProjectReference Include="..\SharedLibrary\SharedLibrary.csproj" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ using System.IdentityModel.Tokens.Jwt; //
 using System.Security.Claims;
 using System.Security.Cryptography; //
 
-namespace Last_Assignment.Service
+namespace Last_Assignment.Service.Services
 {
     public class TokenService : ITokenService
     {
