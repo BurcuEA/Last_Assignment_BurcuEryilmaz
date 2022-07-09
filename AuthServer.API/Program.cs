@@ -45,7 +45,12 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     //    sqlOption.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name); //AppDbContext nerde olduðu , coredeðil data  katmanýnda olduðunu belirtmek lazým ...
     //});
 
+    x.UseNpgsql(builder.Configuration.GetConnectionString("PostgresSqlServer"), npgsqloption =>
+     {
 
+         npgsqloption.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
+
+     });
 
 });
 

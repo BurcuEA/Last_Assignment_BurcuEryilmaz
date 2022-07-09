@@ -35,6 +35,10 @@ namespace Last_Assignment.Data
         {
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
+
+
+            //builder.UseSerialColumns(); ?? !! PSQL videosu
+
             base.OnModelCreating(builder);
         }
     }
