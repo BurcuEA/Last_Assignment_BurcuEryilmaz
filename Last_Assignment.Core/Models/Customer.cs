@@ -12,9 +12,9 @@ namespace Last_Assignment.Core.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PictureUrl { get; set; } // xxxx       
-        public string City { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? PictureUrl { get; set; } // xxxx       
+        public string? City { get; set; }
 
         //Navigation Property
         //Customer ın 1 den fazla  CustomerActivity si olabilir

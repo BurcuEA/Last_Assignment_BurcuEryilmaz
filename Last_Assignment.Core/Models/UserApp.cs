@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Last_Assignment.Core.Models
 {
@@ -21,7 +16,8 @@ namespace Last_Assignment.Core.Models
     ////Identity Role ekleme ... ÖNEMLİİ... // 38. video Start Up 1  13:17 dk sn ... (E) UserApp olduğu class a git ..
     //public class UserRole : IdentityRole
     //{
-    //    //public int MyProperty { get; set; }  IdentityRole tablosuna Hangi sütunu  ne eklemek istiyorsan
+    //    public string Description { get; set; } // IdentityRole tablosuna Hangi sütunu  ne eklemek istiyorsan
+    //public string Description { get; set; }
     //}
 
 

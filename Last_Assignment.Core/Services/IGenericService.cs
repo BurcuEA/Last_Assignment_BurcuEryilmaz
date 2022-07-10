@@ -10,6 +10,6 @@ namespace Last_Assignment.Core.Services
         Task<Response<IEnumerable<TDto>>> Where(Expression<Func<TEntity, bool>> predicate);
         Task<Response<TDto>> AddAsync(TDto dto);
         Task<Response<NoDataDto>> Remove(int id);
-        Task<Response<NoDataDto>> Update(TDto dto, int id);
+        Task<Response<NoDataDto>> UpdateAsync(TDto dto, int id);
     }
 }

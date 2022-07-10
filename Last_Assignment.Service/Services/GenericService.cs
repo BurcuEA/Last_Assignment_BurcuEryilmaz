@@ -48,7 +48,7 @@ namespace Last_Assignment.Service.Services
         public async Task<Response<NoDataDto>> Remove(int id)
         {
             var isExistEntity = await _genericRepository.GetByIdAsync(id);
-            if (isExistEntity != null)
+            if (isExistEntity == null)
             {
                 return Response<NoDataDto>.Fail("Id not found", 404, true);
             }
@@ -58,13 +58,13 @@ namespace Last_Assignment.Service.Services
             return Response<NoDataDto>.Success(204);
         }
 
-        public async Task<Response<NoDataDto>> Update(TDto dto, int id)
+        public async Task<Response<NoDataDto>> UpdateAsync(TDto dto, int id)
         {
             //BU arkadaş henüz track edilmiyor... (A)
             var isExistEntity = await _genericRepository.GetByIdAsync(id);
 
 
-            if (isExistEntity != null)
+            if (isExistEntity == null)
             {
                 return Response<NoDataDto>.Fail("Id not found", 404, true);
             }

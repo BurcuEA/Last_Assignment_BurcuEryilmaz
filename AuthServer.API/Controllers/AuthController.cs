@@ -57,7 +57,7 @@ namespace AuthServer.API.Controllers
         {
             var result = await _authenticationService.RevokeRefreshTokenAsync(refreshTokenDto.Token);
 
-            return ActionResultInstance(result);
+            return ActionResultInstance(result); // nocontent dönseydi daha uygun olurdu ... 200 dönüyor
         }
 
         [HttpPost]

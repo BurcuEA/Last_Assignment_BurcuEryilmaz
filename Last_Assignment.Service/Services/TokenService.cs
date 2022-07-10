@@ -50,7 +50,7 @@ namespace Last_Assignment.Service.Services
             new Claim(ClaimTypes.NameIdentifier,userApp.Id), // ID ye karşılık geliyor,Kimlik
             new Claim(JwtRegisteredClaimNames.Email,userApp.Email), // "email"
             new Claim(ClaimTypes.Name,userApp.UserName),
-
+           
             //new Claim(ClaimTypes.Role), ???  karar ver Identityserver 4 te varmış  ---Token Service 2 --7:56 dk:sn
             //new Claim(ClaimTypes.Role,"Role"), ???  karar ver Identityserver 4 te varmış
 
