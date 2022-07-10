@@ -10,7 +10,7 @@ namespace Last_Assignment.Service.Services
     public class GenericService<TEntity, TDto> : IGenericService<TEntity, TDto> where TEntity : class where TDto : class
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IGenericRepository<TEntity> _genericRepository;
+        protected readonly IGenericRepository<TEntity> _genericRepository;
         public GenericService(IUnitOfWork unitOfWork, IGenericRepository<TEntity> genericRepository)
         {
             _unitOfWork = unitOfWork;

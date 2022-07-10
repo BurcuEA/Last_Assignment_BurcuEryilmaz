@@ -34,6 +34,12 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); // generic old için typeof ...
 builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
 
+builder.Services.AddScoped(typeof(ICustomerActivityRepository), typeof(CustomerActivityRepository));
+builder.Services.AddScoped(typeof(ICustomerActivityService), typeof(CustomerActivityService));
+
+builder.Services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
+builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //Normal DBContext ...
@@ -136,31 +142,6 @@ builder.Services.AddSwaggerGen();
 //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

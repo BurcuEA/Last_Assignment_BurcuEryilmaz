@@ -36,6 +36,22 @@ namespace Last_Assignment.Data
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
 
+            //builder.Entity<Customer>(entity =>
+            //{
+            //    entity.HasMany(cust => cust.CustomerActivities)
+            //    .WithOne(custAct => custAct.Customer)
+            //    .HasForeignKey(custact => custact.Id)
+            //    .IsRequired();
+            //});
+
+            //builder.Entity<CustomerActivity>(entity =>
+            //    {
+            //        entity.HasOne(custact => custact.Customer)
+            //        .WithMany(cust => cust.CustomerActivities)
+            //        .HasForeignKey(custact => custact.Id)
+            //        .IsRequired();
+            //    });
+
 
             //builder.UseSerialColumns(); ?? !! PSQL videosu
 

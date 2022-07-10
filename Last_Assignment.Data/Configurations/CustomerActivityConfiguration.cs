@@ -20,7 +20,14 @@ namespace Last_Assignment.Data.Configurations
             //builder.ToTable("CustomerActivities");
 
 
-            builder.HasOne(x => x.Customer).WithMany(x => x.CustomerActivities).HasForeignKey(x=>x.Id); // BERY -22.Video EntityConfigurations --NRTN video--ilk bakılacak yer burası kalsın o yüzden
+            //builder.HasOne(x => x.Customer).WithMany(x => x.CustomerActivities).HasForeignKey(x=>x.Id); // BERY -22.Video EntityConfigurations --NRTN video--ilk bakılacak yer burası kalsın o yüzden
+
+
+            builder.HasOne(custact => custact.Customer)
+                .WithMany(cust => cust.CustomerActivities)
+                .HasForeignKey(custact => custact.Id)
+                .IsRequired();
+
         }
     }
 }

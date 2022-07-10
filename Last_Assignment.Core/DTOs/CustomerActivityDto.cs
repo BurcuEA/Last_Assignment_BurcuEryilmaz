@@ -11,7 +11,7 @@ namespace Last_Assignment.Core.DTOs
         public int Id { get; set; } // xxx var ?? !!
         public string Service { get; set; }
         public decimal Amount { get; set; }
-        public DateTime ServiceDate { get; set; }
+        //public DateTime ServiceDate { get; set; }
 
 
         // XXXXXXX

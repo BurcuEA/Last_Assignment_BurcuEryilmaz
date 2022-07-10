@@ -11,36 +11,44 @@ namespace AuthServer.API.Controllers
     [ApiController]
     public class CustomerController : CustomBaseController
     {
-        private readonly IGenericService<Customer, CustomerDto> _customerService;
+        private readonly IGenericService<Customer, CustomerDto> _genericService;
+        private readonly ICustomerService _customerService;
 
-        public CustomerController(IGenericService<Customer, CustomerDto> customerService)
+        public CustomerController(IGenericService<Customer, CustomerDto> genericService, ICustomerService customerService)
         {
+            _genericService = genericService;
             _customerService = customerService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
-            return ActionResultInstance(await _customerService.GetAllAsync());
+            return ActionResultInstance(await _genericService.GetAllAsync());
         }
 
         [HttpPost]
         public async Task<IActionResult> SaveCustomer(CustomerDto customerDto)
         {
-            return ActionResultInstance(await _customerService.AddAsync(customerDto));
+            return ActionResultInstance(await _genericService.AddAsync(customerDto));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCustomer(CustomerDto customerDto)
         {
-            return ActionResultInstance(await _customerService.UpdateAsync(customerDto, customerDto.Id));
+            return ActionResultInstance(await _genericService.UpdateAsync(customerDto, customerDto.Id));
         }
 
         //api/customer/2
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            return ActionResultInstance(await _customerService.Remove(id));
+            return ActionResultInstance(await _genericService.Remove(id));
+        }
+
+        [HttpGet("[action]/{categoryId}")]
+        public async Task<IActionResult> GetSingleCustomerByIdWithCustomerActivitiesAsync(int categoryId)  
+        {
+            return ActionResultInstance(await _customerService.GetSingleCustomerByIdWithCustomerActivitiesAsync(categoryId));
         }
 
     }

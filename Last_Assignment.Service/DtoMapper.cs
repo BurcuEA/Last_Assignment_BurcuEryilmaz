@@ -13,6 +13,10 @@ namespace Last_Assignment.Service
             CreateMap<CustomerDto, Customer>().ReverseMap();
             CreateMap<CustomerActivityDto, CustomerActivity>().ReverseMap();
             CreateMap<UserAppDto, UserApp>().ReverseMap();
+            CreateMap<CustomerWithCustomerActivitiesDto, Customer>().ReverseMap();
+            //CreateMap<List<CustomerActivityWithCustomerDto>, List<CustomerActivity>>().ReverseMap();
+            CreateMap<CustomerActivityWithCustomerDto, CustomerActivity>().ReverseMap();
+
         }
     }
 }

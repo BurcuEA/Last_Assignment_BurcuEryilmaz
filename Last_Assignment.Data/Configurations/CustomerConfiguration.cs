@@ -12,10 +12,16 @@ namespace Last_Assignment.Data.Configurations
             builder.Property(x => x.Id).UseIdentityColumn(); // default olara 1 er 1 er artacak veya .UseIdentityColumn(1,2)
             builder.Property(x => x.Name).IsRequired().HasMaxLength(150);
             builder.Property(x => x.Surname).IsRequired();
-            builder.Property(x => x.Email).IsRequired();           
+            builder.Property(x => x.Email).IsRequired();
             builder.Property(x => x.UserId).IsRequired();
 
-            //builder.ToTable("Customer");
+            builder.HasMany(cust => cust.CustomerActivities)
+                .WithOne(custAct => custAct.Customer)
+                .HasForeignKey(custact => custact.Id)
+                .IsRequired();
+
+
+
         }
     }
 }

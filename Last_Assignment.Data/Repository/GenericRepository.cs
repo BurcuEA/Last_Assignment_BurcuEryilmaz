@@ -6,8 +6,8 @@ namespace Last_Assignment.Data.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private readonly DbContext _context;  // VT ile ilgili işlemler için 
-        private readonly DbSet<TEntity> _dbSet;
+        protected readonly DbContext _context;  // VT ile ilgili işlemler için 
+        protected readonly DbSet<TEntity> _dbSet;
 
         /* API tarafına geçince DI container 'a eklenecek DAHA sonra .StartUP cs de ... configureservices metodunda. 
           Uygulamanın herhangi bir yerinde bir classın ctor unda --- bu arkadaşı (GenericRepository yi görüğünde) ---  AppDbContext bir nesne örneği oluşacak */

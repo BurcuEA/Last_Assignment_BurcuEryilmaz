@@ -11,35 +11,43 @@ namespace AuthServer.API.Controllers
     [ApiController]
     public class CustomerActivityController : CustomBaseController
     {
-        private readonly IGenericService<CustomerActivity, CustomerActivityDto> _customerActivityService;
+        private readonly IGenericService<CustomerActivity, CustomerActivityDto> _genericService; //_customerActivityService;
+        private readonly ICustomerActivityService _customerActivityService;
 
-        public CustomerActivityController(IGenericService<CustomerActivity, CustomerActivityDto> customerActivityService)
+        public CustomerActivityController(IGenericService<CustomerActivity, CustomerActivityDto> genericService, ICustomerActivityService customerActivityService)
         {
+            _genericService = genericService;
             _customerActivityService = customerActivityService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts()
+        public async Task<IActionResult> GetCustomerActivities()
         {
-            return ActionResultInstance(await _customerActivityService.GetAllAsync());
+            return ActionResultInstance(await _genericService.GetAllAsync());
         }
 
         [HttpPost]
-        public async Task<IActionResult> SaveProduct(CustomerActivityDto customerActivityDto)
+        public async Task<IActionResult> SaveCustomerActivity(CustomerActivityDto customerActivityDto)
         {
-            return ActionResultInstance(await _customerActivityService.AddAsync(customerActivityDto));
+            return ActionResultInstance(await _genericService.AddAsync(customerActivityDto));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateProduct(CustomerActivityDto customerActivityDto)
+        public async Task<IActionResult> UpdateCustomerActivity(CustomerActivityDto customerActivityDto)
         {
-            return ActionResultInstance(await _customerActivityService.UpdateAsync(customerActivityDto, customerActivityDto.Id));
+            return ActionResultInstance(await _genericService.UpdateAsync(customerActivityDto, customerActivityDto.Id));
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
+        public async Task<IActionResult> DeleteCustomerActivity(int id)
         {
-            return ActionResultInstance(await _customerActivityService.Remove(id));
+            return ActionResultInstance(await _genericService.Remove(id));
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetCustomerActivityWithCustomerAsync()
+        {
+            return ActionResultInstance(await _customerActivityService.GetCustomerActivityWithCustomerAsync());
         }
 
     }
