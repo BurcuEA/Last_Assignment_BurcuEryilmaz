@@ -22,8 +22,8 @@ namespace Last_Assignment.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1662a5ca-531f-4f49-90d5-6a708c8d5c8c", 0, "İstanbul", "998d90f5-0403-4f75-91f0-740d1d9693c1", "editor@gmail.com", false, false, null, null, null, null, "1234567890", false, "177d96e4-08c4-47d6-8326-bddc45310887", false, "Editor" },
-                    { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "İstanbul", "a7af8574-a868-4054-94dc-3f2ae80c235e", "admin@gmail.com", false, false, null, null, null, null, "1234567890", false, "11c21e70-39c8-4470-a0fa-be73d53e2f47", false, "Admin" }
+                    { "1662a5ca-531f-4f49-90d5-6a708c8d5c8c", 0, "İstanbul", "1b068919-b2b7-4125-90ac-b4b4a3d8a7ff", "editor@gmail.com", false, false, null, null, null, null, "1234567890", false, "122a46a0-ce85-4320-a156-4726e0ed9303", false, "Editor" },
+                    { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "İstanbul", "c3fa599c-d391-4cb6-8315-58dcd56fe624", "admin@gmail.com", false, false, null, null, null, null, "1234567890", false, "2efac6bb-c96a-4c04-a10a-cada8d581b0c", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
