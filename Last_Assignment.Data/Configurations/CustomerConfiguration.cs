@@ -17,7 +17,7 @@ namespace Last_Assignment.Data.Configurations
 
             builder.HasMany(cust => cust.CustomerActivities)
                 .WithOne(custAct => custAct.Customer)
-                .HasForeignKey(custact => custact.Id)
+                .HasForeignKey(custact => custact.CustomerId)
                 .IsRequired();
 
 

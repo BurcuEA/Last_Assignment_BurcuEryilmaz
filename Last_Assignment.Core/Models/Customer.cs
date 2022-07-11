@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 namespace Last_Assignment.Core.Models
 {
     //[PersonalData]
-    public class Customer //:IdentityUser
-    {
-        public int Id { get; set; }
+    public class Customer: BaseEntity
+    {    
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }

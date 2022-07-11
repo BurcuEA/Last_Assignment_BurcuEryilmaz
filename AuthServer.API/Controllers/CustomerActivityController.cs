@@ -45,7 +45,7 @@ namespace AuthServer.API.Controllers
         }
 
         [HttpGet("[action]")]
-        public async Task<IActionResult> GetCustomerActivityWithCustomerAsync()
+        public async Task<IActionResult> GetCustomerActivityWithCustomer()
         {
             return ActionResultInstance(await _customerActivityService.GetCustomerActivityWithCustomerAsync());
         }

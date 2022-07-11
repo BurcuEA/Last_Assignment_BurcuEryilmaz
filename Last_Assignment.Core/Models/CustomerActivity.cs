@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace Last_Assignment.Core.Models
 {
-    public class CustomerActivity
-    {
-        public int Id { get; set; } // Primary ve CustomerId // xxxx  
+    public class CustomerActivity : BaseEntity
+    {      
         public string Service { get; set; }
         public decimal Amount  { get; set; }
-        public DateTime ServiceDate { get; set; }    
-        public Customer Customer { get; set; } // xxxx  
+        public DateTime ServiceDate { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; } 
 
-        //public string UserId { get; set; } // xxxx 
 
     }
 }

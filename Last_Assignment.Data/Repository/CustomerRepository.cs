@@ -12,8 +12,11 @@ namespace Last_Assignment.Data.Repository
 
         public async Task<Customer> GetSingleCustomerByIdWithCustomerActivitiesAsync(int customerId)
         {
-            //return await _context.Model.Include(x => x.CustomerActivities).Where(x => x.Id == customerId).SingleOrDefaultAsync();
-            return await _dbSet.SingleOrDefaultAsync();
+           return await ((Last_Assignment.Data.AppDbContext)_context).Customers.Include(x => x.CustomerActivities).Where(x => x.Id == customerId).SingleOrDefaultAsync();
+            // return await _dbSet.SingleOrDefaultAsync();
+
+           // return await GetByIdAsync(customerId);
+            
 
         }
     }

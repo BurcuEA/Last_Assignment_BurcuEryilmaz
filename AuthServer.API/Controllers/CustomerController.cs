@@ -45,10 +45,10 @@ namespace AuthServer.API.Controllers
             return ActionResultInstance(await _genericService.Remove(id));
         }
 
-        [HttpGet("[action]/{categoryId}")]
-        public async Task<IActionResult> GetSingleCustomerByIdWithCustomerActivitiesAsync(int categoryId)  
+        [HttpGet("[action]/{customerId}")]
+        public async Task<IActionResult> GetSingleCustomerByIdWithCustomerActivities(int customerId)  
         {
-            return ActionResultInstance(await _customerService.GetSingleCustomerByIdWithCustomerActivitiesAsync(categoryId));
+            return ActionResultInstance(await _customerService.GetSingleCustomerByIdWithCustomerActivitiesAsync(customerId));
         }
 
     }
