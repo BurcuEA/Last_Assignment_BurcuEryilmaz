@@ -56,6 +56,64 @@ namespace Last_Assignment.Data
             //builder.UseSerialColumns(); ?? !! PSQL videosu
 
             base.OnModelCreating(builder);
+            this.SeedUsers(builder);
+            this.SeedRoles(builder);
+            this.SeedUserRoles(builder);
         }
-    }
+
+
+        private void SeedUsers(ModelBuilder builder)
+        {
+            UserApp user = new UserApp()
+            {
+                Id = "b74ddd14-6340-4840-95c2-db12554843e5",
+                UserName = "Admin",
+                Email = "admin@gmail.com",
+                LockoutEnabled = false,
+                PhoneNumber = "1234567890",
+                City="İstanbul"
+            };
+
+            PasswordHasher<UserApp> passwordHasher = new PasswordHasher<UserApp>();
+            passwordHasher.HashPassword(user, "Admin*123");
+
+            builder.Entity<UserApp>().HasData(user);
+
+
+            UserApp userEditor = new UserApp()
+            {
+                Id = "1662a5ca-531f-4f49-90d5-6a708c8d5c8c",
+                UserName = "Editor",
+                Email = "editor@gmail.com",
+                LockoutEnabled = false,
+                PhoneNumber = "1234567890",
+                City = "İstanbul"
+            };
+
+            PasswordHasher<UserApp> passwordHasherEditor = new PasswordHasher<UserApp>();
+            passwordHasherEditor.HashPassword(userEditor, "Editor*123");
+
+            builder.Entity<UserApp>().HasData(userEditor);
+        }
+
+        private void SeedRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityRole>().HasData(
+                new IdentityRole() { Id = "fab4fac1-c546-41de-aebc-a14da6895711", Name = "Admin", ConcurrencyStamp = "1", NormalizedName = "Admin" },
+                new IdentityRole() { Id = "c7b013f0-5201-4317-abd8-c211f91b7330", Name = "Editor", ConcurrencyStamp = "2", NormalizedName = "Editor Resource" }
+                );
+        }
+
+        private void SeedUserRoles(ModelBuilder builder)
+        {
+            builder.Entity<IdentityUserRole<string>>().HasData(
+                new IdentityUserRole<string>() { RoleId = "fab4fac1-c546-41de-aebc-a14da6895711", UserId = "b74ddd14-6340-4840-95c2-db12554843e5" },
+                new IdentityUserRole<string>() { RoleId = "c7b013f0-5201-4317-abd8-c211f91b7330", UserId = "1662a5ca-531f-4f49-90d5-6a708c8d5c8c" }
+                );
+        }
+    
+
+
+
+}
 }
