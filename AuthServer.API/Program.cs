@@ -1,4 +1,5 @@
- using Last_Assignment.Core.Configuration;
+using FluentValidation.AspNetCore;
+using Last_Assignment.Core.Configuration;
 using Last_Assignment.Core.Models;
 using Last_Assignment.Core.Repositories;
 using Last_Assignment.Core.Services;
@@ -9,7 +10,9 @@ using Last_Assignment.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using SharedLibrary.Configurations;
+using SharedLibrary.Extensions;
 using SharedLibrary.Services;
 using System.Reflection;
 
@@ -118,10 +121,10 @@ builder.Services.AddAuthentication(options =>
 
 // Add services to the container. hoca alta aldý... h1
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//builder.Services.AddControllers();
+//// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+//builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
 // Add services to the container. hoca alta aldý... h1
 
 
@@ -131,17 +134,27 @@ builder.Services.AddSwaggerGen();
 
 //// Add services to the container.   DEVAMmmmmm
 
-//builder.Services.AddControllers().AddFluentValidation(options =>
-//{
-//    options.RegisterValidatorsFromAssemblyContaining<Program>();
-//});
+builder.Services.AddControllers().AddFluentValidation(options =>
+{
+    options.RegisterValidatorsFromAssemblyContaining<Program>();
+});
 
-//builder.Services.UseCustomValidationResponse();
+builder.Services.UseCustomValidationResponse();
 
 
 //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddEndpointsApiExplorer();
+
+
+
+
+
+// yeni ekledim  -- 51. video 10:54 te görünüyor
+builder.Services.AddSwaggerGen(c=>
+{
+    c.SwaggerDoc("v1",new OpenApiInfo { Title= "AuthServer.API", Version="v1"});
+
+});
 
 
 
@@ -159,9 +172,13 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage(); // 52.video 13:13 te görünüyor
+    
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c=>c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthServer.API v1")); // 52.video 13:13 te görünüyor
 }
+
+app.UseCustomException();
 
 app.UseHttpsRedirection();
 
