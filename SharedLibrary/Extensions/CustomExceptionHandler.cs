@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace SharedLibrary.Extensions
 {
-    public static class CustomExceptionHandler
+    public static class CustomExceptionHandler 
     {
         public static void UseCustomException(this IApplicationBuilder app)
         {

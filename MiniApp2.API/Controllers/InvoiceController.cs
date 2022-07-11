@@ -13,9 +13,9 @@ namespace MiniApp2.API.Controllers
         public IActionResult GetInvoices()
         {
             var userName = HttpContext.User.Identity.Name;
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-            return Ok($"Invoice İşlemleri => UserName:{userName} - UserId:{userId}");
+            return Ok($"Invoice İşlemleri => UserName:{userName} - UserId:{userIdClaim.Value}");
         }
     }
 }

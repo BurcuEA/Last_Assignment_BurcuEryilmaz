@@ -7,7 +7,7 @@ namespace SharedLibrary.Extensions
 {
     public static class CustomTokenAuth
     {
-        public static void AddCustomTokenAuth(this IServiceCollection services, CustomTokenOption tokenOption)
+        public static void AddCustomTokenAuth(this IServiceCollection services, CustomTokenOption tokenOption) // kim için yazıyoruz this IServiceCollection için...
         {
             services.AddAuthentication(options =>
             {

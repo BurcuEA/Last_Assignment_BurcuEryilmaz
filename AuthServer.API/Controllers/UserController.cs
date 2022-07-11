@@ -2,6 +2,7 @@
 using Last_Assignment.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SharedLibrary.Exceptions;
 
 namespace AuthServer.API.Controllers
 {

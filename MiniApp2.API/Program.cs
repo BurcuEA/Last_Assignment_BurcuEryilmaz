@@ -3,12 +3,13 @@ using SharedLibrary.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region "// bunlar yazýldýðý an API lar korunuyor artýk ... (miniapi ler) bas"
+
 builder.Services.Configure<CustomTokenOption>(builder.Configuration.GetSection("TokenOption"));
 var tokenOption = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
 
 builder.Services.AddCustomTokenAuth(tokenOption);
-
-
+#endregion
 
 // Add services to the container.
 

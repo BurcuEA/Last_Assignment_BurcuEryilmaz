@@ -84,7 +84,7 @@ namespace Last_Assignment.Service.Services
             if (client == null)
             {
                 //Async kullanmıyoruz ...
-                return Response<ClientTokenDto>.Fail("Client Id or Client Secret not found", 404, true);
+                return Response<ClientTokenDto>.Fail("Client Id or Client Secret not found", 404, false);
             }
 
             var token = _tokenService.CreateTokenByClient(client);
