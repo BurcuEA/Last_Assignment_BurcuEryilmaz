@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Last_Assignment.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220712121236_SeedDatas_UserFileAdd")]
-    partial class SeedDatas_UserFileAdd
+    [Migration("20220712200904_RabbitMq_SeedData")]
+    partial class RabbitMq_SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,13 +178,13 @@ namespace Last_Assignment.Data.Migrations
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
                             City = "İstanbul",
-                            ConcurrencyStamp = "41c87735-338b-4619-8614-503854ab0d8a",
+                            ConcurrencyStamp = "ffc91c07-32ef-45c3-8ba5-7efd41affd54",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "82733fc7-bfb8-4459-bbbc-c4005b79fea4",
+                            SecurityStamp = "dac2febe-ddf6-4a5b-92f6-53717bc5d74c",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -193,13 +193,13 @@ namespace Last_Assignment.Data.Migrations
                             Id = "1662a5ca-531f-4f49-90d5-6a708c8d5c8c",
                             AccessFailedCount = 0,
                             City = "İstanbul",
-                            ConcurrencyStamp = "f80938a8-2228-4ec9-9731-009d4b6fc3a5",
+                            ConcurrencyStamp = "f89024de-d71c-4a16-b74f-fd325d565e28",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "97e9f093-3537-4c64-b940-b03f46b4c2cd",
+                            SecurityStamp = "2f8d72f5-c62d-4dd4-935b-d2fe5eaa52d7",
                             TwoFactorEnabled = false,
                             UserName = "Editor"
                         });
@@ -230,7 +230,7 @@ namespace Last_Assignment.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserFiles");
+                    b.ToTable("UserFile", (string)null);
                 });
 
             modelBuilder.Entity("Last_Assignment.Core.Models.UserRefreshToken", b =>

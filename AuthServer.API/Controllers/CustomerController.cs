@@ -51,5 +51,14 @@ namespace AuthServer.API.Controllers
             return ActionResultInstance(await _customerService.GetSingleCustomerByIdWithCustomerActivitiesAsync(customerId));
         }
 
+
+
+
+
+
+
+
+
+
     }
 }

@@ -5,12 +5,12 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Last_Assignment.Data.Migrations
 {
-    public partial class SeedDatas_UserFileAdd : Migration
+    public partial class RabbitMq_SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "UserFiles",
+                name: "UserFile",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -22,7 +22,7 @@ namespace Last_Assignment.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserFiles", x => x.Id);
+                    table.PrimaryKey("PK_UserFile", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
@@ -39,8 +39,8 @@ namespace Last_Assignment.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "1662a5ca-531f-4f49-90d5-6a708c8d5c8c", 0, "İstanbul", "f80938a8-2228-4ec9-9731-009d4b6fc3a5", "editor@gmail.com", false, false, null, null, null, null, "1234567890", false, "97e9f093-3537-4c64-b940-b03f46b4c2cd", false, "Editor" },
-                    { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "İstanbul", "41c87735-338b-4619-8614-503854ab0d8a", "admin@gmail.com", false, false, null, null, null, null, "1234567890", false, "82733fc7-bfb8-4459-bbbc-c4005b79fea4", false, "Admin" }
+                    { "1662a5ca-531f-4f49-90d5-6a708c8d5c8c", 0, "İstanbul", "f89024de-d71c-4a16-b74f-fd325d565e28", "editor@gmail.com", false, false, null, null, null, null, "1234567890", false, "2f8d72f5-c62d-4dd4-935b-d2fe5eaa52d7", false, "Editor" },
+                    { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "İstanbul", "ffc91c07-32ef-45c3-8ba5-7efd41affd54", "admin@gmail.com", false, false, null, null, null, null, "1234567890", false, "dac2febe-ddf6-4a5b-92f6-53717bc5d74c", false, "Admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -56,7 +56,7 @@ namespace Last_Assignment.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserFiles");
+                name: "UserFile");
 
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",

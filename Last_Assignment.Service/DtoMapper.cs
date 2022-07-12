@@ -16,6 +16,9 @@ namespace Last_Assignment.Service
             CreateMap<CustomerWithCustomerActivitiesDto, Customer>().ReverseMap();
             //CreateMap<List<CustomerActivityWithCustomerDto>, List<CustomerActivity>>().ReverseMap();
             CreateMap<CustomerActivityWithCustomerDto, CustomerActivity>().ReverseMap();
+            CreateMap<UserFileDto, UserFile>().ReverseMap();
+
+            
 
         }
     }

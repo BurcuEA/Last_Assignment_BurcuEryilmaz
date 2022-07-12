@@ -5,7 +5,7 @@ using SharedLibrary.Dtos;
 namespace Last_Assignment.Core.Services
 {
     public interface ICustomerService : IGenericService<Customer, CustomerWithCustomerActivitiesDto>
-    {        
-        public Task<Response<CustomerWithCustomerActivitiesDto>> GetSingleCustomerByIdWithCustomerActivitiesAsync(int customerId);
+    {
+        Task<Response<CustomerWithCustomerActivitiesDto>> GetSingleCustomerByIdWithCustomerActivitiesAsync(int customerId);
     }
 }

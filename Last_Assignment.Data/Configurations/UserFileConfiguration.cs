@@ -16,6 +16,9 @@ namespace Last_Assignment.Data.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
 
+
+            builder.ToTable("UserFile");
+
             builder.Ignore(c=>c.CreatedDate); // NotMapped
             
 

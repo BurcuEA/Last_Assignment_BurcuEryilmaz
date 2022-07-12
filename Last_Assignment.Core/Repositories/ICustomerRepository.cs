@@ -4,6 +4,6 @@ namespace Last_Assignment.Core.Repositories
 {
     public interface ICustomerRepository : IGenericRepository<Customer>
     {
-        Task<Customer> GetSingleCustomerByIdWithCustomerActivitiesAsync(int customerId);
+        Task<Customer> GetSingleCustomerByIdWithCustomerActivitiesAsync(int customerId);        
     }
 }

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using SharedLibrary.Configurations;
 using SharedLibrary.Extensions;
 using SharedLibrary.Services;
@@ -42,6 +43,10 @@ builder.Services.AddScoped(typeof(ICustomerActivityService), typeof(CustomerActi
 
 builder.Services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
 builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
+
+
+builder.Services.AddScoped(typeof(IExcelDtoRepository), typeof(ExcelDtoRepository));
+builder.Services.AddScoped(typeof(IExcelDtoService), typeof(ExcelDtoService));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -164,6 +169,11 @@ builder.Services.AddSwaggerGen(c=>
 
 
 #endregion
+
+builder.Services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(builder.Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
+
+builder.Services.AddSingleton<RabbitMQPublisher>();
+builder.Services.AddSingleton<RabbitMQClientService>();
 
 
 

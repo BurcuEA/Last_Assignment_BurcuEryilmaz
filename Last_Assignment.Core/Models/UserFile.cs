@@ -21,6 +21,7 @@ namespace Last_Assignment.Core.Models
         public string FilePath { get; set; }
         public DateTime? CreatedDate { get; set; }
         public FileStatus FileStatus { get; set; }
+        // public bool FileStatus { get; set; }
 
 
         //[NotMapped]
