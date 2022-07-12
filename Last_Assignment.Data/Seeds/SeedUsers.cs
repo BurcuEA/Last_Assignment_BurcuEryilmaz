@@ -22,10 +22,13 @@ namespace Last_Assignment.Data.Seeds
                 LockoutEnabled = false,
                 PhoneNumber = "1234567890",
                 City = "İstanbul"
+
             };
 
             PasswordHasher<UserApp> passwordHasher = new PasswordHasher<UserApp>();
-            passwordHasher.HashPassword(user, "Admin*123");
+            //passwordHasher.HashPassword(user, "Admin*123");
+            passwordHasher.HashPassword(user, "Password12*");
+
 
             builder.HasData(user);
 
@@ -41,7 +44,8 @@ namespace Last_Assignment.Data.Seeds
             };
 
             PasswordHasher<UserApp> passwordHasherEditor = new PasswordHasher<UserApp>();
-            passwordHasherEditor.HashPassword(userEditor, "Editor*123");
+            //passwordHasherEditor.HashPassword(userEditor, "Editor*123");
+            passwordHasher.HashPassword(user, "Password12*");
 
             builder.HasData(userEditor);
         }

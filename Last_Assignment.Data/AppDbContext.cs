@@ -24,6 +24,7 @@ namespace Last_Assignment.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerActivity> CustomerActivities { get; set; }
         public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+        public DbSet<UserFile> UserFiles { get; set; }
 
         // Tabloların colonlarının yapıları ne olacak ,required , null,stringlength max  olacak mı vs diye gibi ayarlar için bunu ekliyoruz ....
         // burayı şişirmemek için  Configurations dosyası  kısmına gidiyoruz,Entity lerle ilgili herşeyi buraya yazmak istemiyoruz

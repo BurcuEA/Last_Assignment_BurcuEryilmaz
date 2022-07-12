@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Last_Assignment.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220711230959_Seed_Data")]
-    partial class Seed_Data
+    [Migration("20220712121236_SeedDatas_UserFileAdd")]
+    partial class SeedDatas_UserFileAdd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,13 +178,13 @@ namespace Last_Assignment.Data.Migrations
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
                             City = "İstanbul",
-                            ConcurrencyStamp = "c3fa599c-d391-4cb6-8315-58dcd56fe624",
+                            ConcurrencyStamp = "41c87735-338b-4619-8614-503854ab0d8a",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2efac6bb-c96a-4c04-a10a-cada8d581b0c",
+                            SecurityStamp = "82733fc7-bfb8-4459-bbbc-c4005b79fea4",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -193,16 +193,44 @@ namespace Last_Assignment.Data.Migrations
                             Id = "1662a5ca-531f-4f49-90d5-6a708c8d5c8c",
                             AccessFailedCount = 0,
                             City = "İstanbul",
-                            ConcurrencyStamp = "1b068919-b2b7-4125-90ac-b4b4a3d8a7ff",
+                            ConcurrencyStamp = "f80938a8-2228-4ec9-9731-009d4b6fc3a5",
                             Email = "editor@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "122a46a0-ce85-4320-a156-4726e0ed9303",
+                            SecurityStamp = "97e9f093-3537-4c64-b940-b03f46b4c2cd",
                             TwoFactorEnabled = false,
                             UserName = "Editor"
                         });
+                });
+
+            modelBuilder.Entity("Last_Assignment.Core.Models.UserFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("FileStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserFiles");
                 });
 
             modelBuilder.Entity("Last_Assignment.Core.Models.UserRefreshToken", b =>
