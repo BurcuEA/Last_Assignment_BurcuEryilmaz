@@ -1,14 +1,12 @@
 ﻿using Last_Assignment.Core.DTOs;
 using Last_Assignment.Core.Models;
-using SharedLibrary.Dtos;
 
-namespace Last_Assignment.Core.Services
+namespace Last_Assignment.Core.Repositories
 {
-    public interface IExcelDtoService
+    public interface IUserFileRepository
     {
         //Task<List<ExcelDto>> GetExcelDtoAsync();
         Task<UserFile> CreateUserFileAsync(string userId);
-        Task<Response<UserFileDto>> GetFilesAsync(string userName);
+        Task<List<UserFile>> GetFilesAsync(string userId);
     }
-
 }

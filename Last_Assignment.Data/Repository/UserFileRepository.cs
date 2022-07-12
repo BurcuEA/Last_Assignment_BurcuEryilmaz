@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Last_Assignment.Data.Repository
 {
-    public class ExcelDtoRepository : GenericRepository<UserFile>, IExcelDtoRepository
+    public class UserFileRepository : GenericRepository<UserFile>, IUserFileRepository
     {
         private readonly AppDbContext _context;
-        public ExcelDtoRepository(AppDbContext context) : base(context)
+        public UserFileRepository(AppDbContext context) : base(context)
         {
             _context = context;
         }

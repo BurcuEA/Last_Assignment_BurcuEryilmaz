@@ -10,17 +10,17 @@ namespace AuthServer.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ExcelDtoController : CustomBaseController
+    public class UserFileController : CustomBaseController
     {
 
         private readonly IGenericService<UserFile, UserFileDto> _genericService;
-        private readonly IExcelDtoService _excelDtoService;
+        private readonly IUserFileService _userFileService;
         private readonly UserManager<UserApp> _userManager;
 
-        public ExcelDtoController(IGenericService<UserFile, UserFileDto> genericService,IExcelDtoService excelDtoService, UserManager<UserApp> userManager)
+        public UserFileController(IGenericService<UserFile, UserFileDto> genericService,IUserFileService userFileService, UserManager<UserApp> userManager)
         {
             _genericService = genericService;
-            _excelDtoService = excelDtoService;
+            _userFileService = userFileService;
             _userManager = userManager;
         }
 
@@ -28,7 +28,7 @@ namespace AuthServer.API.Controllers
         public async Task<IActionResult> GetFiles(string userId)
         {
             //return ActionResultInstance(await _excelDtoService.GetFilesAsync(HttpContext.User.Identity.Name));
-            return ActionResultInstance(await _excelDtoService.GetFilesAsync(userId));
+            return ActionResultInstance(await _userFileService.GetFilesAsync(userId));
 
         }
     }

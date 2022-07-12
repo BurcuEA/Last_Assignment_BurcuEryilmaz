@@ -45,8 +45,8 @@ builder.Services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepositor
 builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
 
 
-builder.Services.AddScoped(typeof(IExcelDtoRepository), typeof(ExcelDtoRepository));
-builder.Services.AddScoped(typeof(IExcelDtoService), typeof(ExcelDtoService));
+builder.Services.AddScoped(typeof(IUserFileRepository), typeof(UserFileRepository));
+builder.Services.AddScoped(typeof(IUserFileService), typeof(UserFileService));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
