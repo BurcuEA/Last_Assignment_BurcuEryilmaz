@@ -5,7 +5,6 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using SharedLibrary;
 using System.Data;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 

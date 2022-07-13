@@ -15,6 +15,7 @@ using RabbitMQ.Client;
 using SharedLibrary.Configurations;
 using SharedLibrary.Extensions;
 using SharedLibrary.Services;
+using SharedLibrary.Services.EmailService;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,9 +34,10 @@ builder.Services.AddScoped(typeof(ICustomerActivityService), typeof(CustomerActi
 builder.Services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
 builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
 
-
 builder.Services.AddScoped(typeof(IUserFileRepository), typeof(UserFileRepository));
 builder.Services.AddScoped(typeof(IUserFileService), typeof(UserFileService));
+
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
