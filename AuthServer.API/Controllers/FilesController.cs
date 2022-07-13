@@ -9,16 +9,10 @@ namespace AuthServer.API.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
-
         private readonly AppDbContext _context;
-
-        //private readonly IHubContext<MyHub> _hubContext;
-
-        //public FilesController(AppDbContext context, IHubContext<MyHub> hubContext)
         public FilesController(AppDbContext context)
         {
             _context = context;
-            //_hubContext = hubContext;
         }
 
         [HttpPost]
@@ -26,32 +20,18 @@ namespace AuthServer.API.Controllers
         {
             if (file is not { Length: > 0 }) return BadRequest();
 
-
             var userFile = await _context.UserFiles.FirstAsync(x => x.Id == fileId);
-
             var filePath = userFile.FileName + Path.GetExtension(file.FileName);
-
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files", filePath);
 
-
-
             using FileStream stream = new(path, FileMode.Create);
-
             await file.CopyToAsync(stream);
-
 
             userFile.CreatedDate = DateTime.Now;
             userFile.FilePath = filePath;
             userFile.FileStatus = FileStatus.Completed;
 
             await _context.SaveChangesAsync();
-
-            //SignalR notification oluşturulacak BERYY   sil
-
-
-            //await _hubContext.Clients.User(userFile.UserId).SendAsync("CompletedFile");
-
-
 
             return Ok();
         }

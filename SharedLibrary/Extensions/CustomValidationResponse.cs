@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using SharedLibrary.Dtos;
 
@@ -8,7 +8,6 @@ namespace SharedLibrary.Extensions
     {
         public static void UseCustomValidationResponse(this IServiceCollection services)
         {
-
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = context =>

@@ -6,13 +6,9 @@ using RabbitMQ.Client;
 using System.Reflection;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    //.ConfigureServices(services=> BERY
     .ConfigureServices((hostContext,services) =>
     {
-
         IConfiguration Configuration = hostContext.Configuration;
-
-
 
         services.AddDbContext<LastAssignmentDBContext>(x =>
         {
@@ -25,9 +21,7 @@ IHost host = Host.CreateDefaultBuilder(args)
         //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         services.AddSingleton<RabbitMQClientService>();
-        services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
-       
-
+        services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });      
 
         services.AddHostedService<Worker>();
     })

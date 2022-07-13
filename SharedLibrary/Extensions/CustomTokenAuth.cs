@@ -15,7 +15,6 @@ namespace SharedLibrary.Extensions
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opts =>
             {
-                //var tokenOption = builder.Configuration.GetSection("TokenOption").Get<CustomTokenOption>();
                 opts.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
                 {
                     ValidIssuer = tokenOption.Issuer,

@@ -11,7 +11,6 @@ namespace AuthServer.API.Controllers
     public class UserController : CustomBaseController
     {
         private readonly IUserService _userService;
-
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -25,18 +24,12 @@ namespace AuthServer.API.Controllers
             return ActionResultInstance(await _userService.CreateUserAsync(createUserDto));
         }
 
-
-
-        //Action içerisinde Arka arkaya kullanılan code tekrarı varsa attribute yapıp kullanıyor... action içleri temiz olsun,bussiness işlerini servis katmanında yapmak daha iyi ......
-
-
-        [Authorize] // endpoint'in token istemesi //program.cs de  app.UseAuthentication(); //şimdilik sadece burada token isteyen [Authorize] ihtiyaç duyuldu ...
+        [Authorize] 
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
             // TokenService teki  new Claim(ClaimTypes.Name,userApp.UserName) ile ...
-            // aksi halde HttpContext.User.Claims.Where(x=>x.Type=="username").FirstOrDefault diyerek bulmaya çalışılacaktık ...
-
+            // aksi halde HttpContext.User.Claims.Where(x=>x.Type=="username").FirstOrDefault 
             return ActionResultInstance(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
         }
     }

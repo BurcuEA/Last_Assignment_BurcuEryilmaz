@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Last_Assignment.Core.Models
+﻿namespace Last_Assignment.Core.Models
 {
     public class CustomerActivity : BaseEntity
     {      
@@ -13,7 +7,5 @@ namespace Last_Assignment.Core.Models
         public DateTime ServiceDate { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; } 
-
-
     }
 }

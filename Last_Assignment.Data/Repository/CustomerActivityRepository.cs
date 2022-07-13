@@ -12,10 +12,7 @@ namespace Last_Assignment.Data.Repository
 
         public async Task<List<CustomerActivity>> GetCustomerActivityWithCustomerAsync()
         {
-            //return await _context.Products.Include(x => x.Category).ToListAsync();
-
             return await ((Last_Assignment.Data.AppDbContext)_context).CustomerActivities.Include(x => x.Customer).ToListAsync();
-
         }
     }
 }

@@ -8,8 +8,7 @@ namespace Last_Assignment.Core.Services
     //Response dönmüyoruz,ITokenService'i kendi içinde kullanıyoruz,IGenericService gibi değil yani
     public interface ITokenService
     {
-        TokenDto CreateToken(UserApp userApp);   // Herhangibir kullanıcı için oluşturulacak.Bu user a özgü bir token oluşturulacak
-
-        ClientTokenDto CreateTokenByClient(Client client); // Burdaki client telefone ya da bilgisar bibi düşün
+        TokenDto CreateToken(UserApp userApp);   
+        ClientTokenDto CreateTokenByClient(Client client); 
     }
 }

@@ -26,7 +26,6 @@ namespace Last_Assignment.Service.Services
             properties.Persistent = true;
 
             channel.BasicPublish(exchange: RabbitMQClientService.ExchangeName, routingKey: RabbitMQClientService.RoutingExcel, basicProperties: properties, body: bodyByte);
-
         }
     }
 }

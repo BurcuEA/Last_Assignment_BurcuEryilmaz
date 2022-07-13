@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthServer.API.Controllers
 {
-    [Authorize] // customer eklenmesi için üye olunması gerek ...
+    [Authorize] 
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : CustomBaseController
@@ -50,15 +50,5 @@ namespace AuthServer.API.Controllers
         {
             return ActionResultInstance(await _customerService.GetSingleCustomerByIdWithCustomerActivitiesAsync(customerId));
         }
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -6,14 +6,11 @@ namespace Last_Assignment.Data.Repository
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext _context;  // VT ile ilgili işlemler için 
+        protected readonly DbContext _context;   
         protected readonly DbSet<TEntity> _dbSet;
 
-        /* API tarafına geçince DI container 'a eklenecek DAHA sonra .StartUP cs de ... configureservices metodunda. 
-          Uygulamanın herhangi bir yerinde bir classın ctor unda --- bu arkadaşı (GenericRepository yi görüğünde) ---  AppDbContext bir nesne örneği oluşacak */
         public GenericRepository(AppDbContext context)
         {
-            //DbContext ve IdentiyDbContext miras durumu incelemek aklına gelsin..
             _context = context;
             _dbSet = _context.Set<TEntity>();
         }
@@ -33,8 +30,9 @@ namespace Last_Assignment.Data.Repository
             var entity = await _dbSet.FindAsync(id);
             if (entity != null)
             {
-                _context.Entry(entity).State = EntityState.Detached; // bunu memory den at demişiz ..(A)
+                _context.Entry(entity).State = EntityState.Detached; // memory den at  
             }
+
             return entity;
         }
 
@@ -45,14 +43,6 @@ namespace Last_Assignment.Data.Repository
 
         public TEntity Update(TEntity entity)
         {
-            /*Domain Driven... Design kullanılması gereken yerde,çok business kuralı  varsa -GenericRepository ......
-             * 
-             * Product.GetById(1)
-             Product.Nmae = "Kalem"  -- sadece Name ini güncelliyor,
-            context.SaveChanges()             
-             */
-
-            //Performans açısından GenericRepository kullanmanın nin Dezavantajı ,fakat merkezileştirmek adına kullanıyoruz
             _context.Entry(entity).State = EntityState.Modified;
 
             return entity;

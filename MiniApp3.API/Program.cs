@@ -10,7 +10,6 @@ var tokenOption = builder.Configuration.GetSection("TokenOption").Get<CustomToke
 builder.Services.AddCustomTokenAuth(tokenOption);
 
 
-
 // Add services to the container.
 
 builder.Services.AddControllers();

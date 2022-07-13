@@ -26,15 +26,11 @@ namespace Last_Assignment.Service.Services
 
         public async Task<Response<UserFileDto>> GetFilesAsync(string userId)
         {
-            //var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            //var user = await _userManager.FindByNameAsync(userId);
             var userFile = await CreateUserFileAsync(userId);
 
             _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id }); 
-            // ---- TempData["StartCreatingExcel"] = true;
-
+          
             return Response<UserFileDto>.Success(ObjectMapper.Mapper.Map<UserFileDto>(userFile), 200);
-
         }
 
         public async Task<UserFile> CreateUserFileAsync(string userId)
@@ -45,13 +41,6 @@ namespace Last_Assignment.Service.Services
            await _unitOfWork.CommitAsync();
 
             return userFile;
-        }
-
-        //public async Task<List<ExcelDto>> GetExcelDtoAsync()
-        //{
-        //    //return Response<List<ExcelDto>>.Success(200);
-        //    return await _excelDtoRepository.GetExcelDtoAsync();
-        //}
-
+        }      
     }
 }

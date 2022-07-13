@@ -2,7 +2,7 @@
 {
     public class ClientLoginDto
     {
-        public string ClientId { get; set; } // UserName gibi düşüneceğiz
-        public string ClientSecret { get; set; } // Password gibi düşüneceğiz
+        public string ClientId { get; set; } 
+        public string ClientSecret { get; set; } 
     }
 }

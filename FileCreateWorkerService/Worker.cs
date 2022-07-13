@@ -14,12 +14,10 @@ namespace FileCreateWorkerService
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-
         private readonly RabbitMQClientService _rabbitMQClientService;
-
         private readonly IServiceProvider _serviceProvider;
-
         private IModel _channel;
+
         public Worker(ILogger<Worker> logger, RabbitMQClientService rabbitMQClientService, IServiceProvider serviceProvider)
         {
             _logger = logger;
@@ -37,7 +35,6 @@ namespace FileCreateWorkerService
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
             _channel.BasicConsume(RabbitMQClientService.QueueName, false, consumer);
@@ -51,17 +48,13 @@ namespace FileCreateWorkerService
         {
             await Task.Delay(5000);
 
-
             var createExcelMessage = JsonSerializer.Deserialize<CreateExcelMessage>(Encoding.UTF8.GetString(@event.Body.ToArray()));
 
-
             using var ms = new System.IO.MemoryStream();
-
 
             var wb = new XLWorkbook();
             var ds = new DataSet();
             ds.Tables.Add(GetTable("ExcelReport"));
-
 
             wb.Worksheets.Add(ds);
             wb.SaveAs(ms);
@@ -70,51 +63,34 @@ namespace FileCreateWorkerService
 
             multipartFormDataContent.Add(new ByteArrayContent(ms.ToArray()), "file", Guid.NewGuid().ToString() + ".xlsx");
 
-
             var baseUrl = "https://localhost:7228/api/Files";
 
             using (var httpClient = new HttpClient())
             {
-                try
-                {
+                //try
+                //{
                     var response = await httpClient.PostAsync($"{baseUrl}?fileId={createExcelMessage.FileId}", multipartFormDataContent);
 
                     if (response.IsSuccessStatusCode)
                     {
-
                         _logger.LogInformation($"File ( Id : {createExcelMessage.FileId}) was created by successful");
                         _channel.BasicAck(@event.DeliveryTag, false);
                     }
-
-                }
-                catch (Exception ex)
-                {
-
-                    var hata = ex.Message;
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    var hata = ex.Message;
+                //}
             }
-
-
-
         }
-
-
 
         private DataTable GetTable(string tableName)
         {
-            //List<FileCreateWorkerService.Models.Product> products;
-            // List<FileCreateWorkerService.Models.Customer> customers;
             List<ReportListDto> reportList;
 
             using (var scope = _serviceProvider.CreateScope())
             {
-                //var context = scope.ServiceProvider.GetRequiredService<AdventureWorks2019Context>();
                 var context = scope.ServiceProvider.GetRequiredService<LastAssignmentDBContext>();
-
-
-                //products = context.Products.ToList();
-                //customers = context.Customers.ToList();
-
 
                 reportList = (from cust in context.Customers
                               join custAct in context.CustomerActivities on cust.Id equals custAct.CustomerId
@@ -127,10 +103,7 @@ namespace FileCreateWorkerService
                                   PhoneNumber = grp.Key.PhoneNumber,
                                   Count = grp.Where(c => c.CustomerId > 0).Count(),
                                   TotalAmount = grp.Sum(c => c.Amount)
-                              }).ToList(); //Take(10);
-
-
-
+                              }).ToList(); 
             }
 
             DataTable table = new DataTable { TableName = tableName };
@@ -143,25 +116,11 @@ namespace FileCreateWorkerService
             table.Columns.Add("TotalAmount", typeof(decimal));
 
             reportList.ForEach(x =>
-            //customers.ForEach(x =>
                 {
-                    //table.Rows.Add(x.ProductId, x.Name, x.ProductNumber, x.Color);
-
                     table.Rows.Add(x.CustomerId, x.Name, x.Surname, x.PhoneNumber, x.Count, x.TotalAmount);
-                    //table.Rows.Add(x.UserId, x.Name, x.Surname, x.PhoneNumber);
-
                 });
 
-            //customers.ForEach(x =>
-            //{
-            //    //table.Rows.Add(x.ProductId, x.Name, x.ProductNumber, x.Color);
-            //    table.Rows.Add(x.ProductId, x.Name, x.ProductNumber, x.Color);
-
-            //});
-
             return table;
-
-
         }
     }
 }

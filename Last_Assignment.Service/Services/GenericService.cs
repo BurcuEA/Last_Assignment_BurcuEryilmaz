@@ -1,5 +1,5 @@
-﻿using Last_Assignment.Core.Services;
-using Last_Assignment.Core.Repositories;
+﻿using Last_Assignment.Core.Repositories;
+using Last_Assignment.Core.Services;
 using Last_Assignment.Core.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using SharedLibrary.Dtos;
@@ -60,17 +60,13 @@ namespace Last_Assignment.Service.Services
 
         public async Task<Response<NoDataDto>> UpdateAsync(TDto dto, int id)
         {
-            //BU arkadaş henüz track edilmiyor... (A)
             var isExistEntity = await _genericRepository.GetByIdAsync(id);
-
 
             if (isExistEntity == null)
             {
                 return Response<NoDataDto>.Fail("Id not found", 404, true);
             }
 
-
-            //Memory de 2 tane state i modify olarak işaretlenecek  diye Detach demişiz... ÇOK ÖNEMLİ ... (A)
             var updateEntity = ObjectMapper.Mapper.Map<TEntity>(dto);
             _genericRepository.Update(updateEntity);
             await _unitOfWork.CommitAsync();

@@ -13,7 +13,6 @@ namespace AuthServer.API.Controllers
     {
         private readonly IGenericService<CustomerActivity, CustomerActivityDto> _genericService; //_customerActivityService;
         private readonly ICustomerActivityService _customerActivityService;
-
         public CustomerActivityController(IGenericService<CustomerActivity, CustomerActivityDto> genericService, ICustomerActivityService customerActivityService)
         {
             _genericService = genericService;

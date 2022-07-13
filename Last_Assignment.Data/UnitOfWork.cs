@@ -4,7 +4,6 @@ namespace Last_Assignment.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
-        // SaveChange metodunu çağırabilmek için dbcontext e ihtiyaç var...
         private readonly AppDbContext _context;
         public UnitOfWork(AppDbContext appDbContext)
         {           

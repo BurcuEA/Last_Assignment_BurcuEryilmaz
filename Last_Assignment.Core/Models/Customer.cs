@@ -1,27 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Last_Assignment.Core.Models
+﻿namespace Last_Assignment.Core.Models
 {
-    //[PersonalData]
     public class Customer: BaseEntity
     {    
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public string? PictureUrl { get; set; } // xxxx       
+        public string? PictureUrl { get; set; }       
         public string? City { get; set; }
 
         //Navigation Property
-        //Customer ın 1 den fazla  CustomerActivity si olabilir
-        public ICollection<CustomerActivity> CustomerActivities { get; set; } // xxxx  
+        public ICollection<CustomerActivity> CustomerActivities { get; set; } 
 
-
-        public string UserId { get; set; } // idetity  ID sting gelcek Bu ürün kime ait ten yola çıkarak bu customer kim 
+        public string UserId { get; set; }  
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLibrary
+﻿namespace SharedLibrary
 {
     public class ReportListDto
     {
@@ -15,5 +9,4 @@ namespace SharedLibrary
         public int Count { get; set; }
         public decimal TotalAmount { get; set; }
     }
-
 }

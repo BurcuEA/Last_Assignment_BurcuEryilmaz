@@ -2,11 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Last_Assignment.Data.Seeds
 {
@@ -26,12 +21,9 @@ namespace Last_Assignment.Data.Seeds
             };
 
             PasswordHasher<UserApp> passwordHasher = new PasswordHasher<UserApp>();
-            //passwordHasher.HashPassword(user, "Admin*123");
             passwordHasher.HashPassword(user, "Password12*");
 
-
             builder.HasData(user);
-
 
             UserApp userEditor = new UserApp()
             {
@@ -44,7 +36,6 @@ namespace Last_Assignment.Data.Seeds
             };
 
             PasswordHasher<UserApp> passwordHasherEditor = new PasswordHasher<UserApp>();
-            //passwordHasherEditor.HashPassword(userEditor, "Editor*123");
             passwordHasher.HashPassword(user, "Password12*");
 
             builder.HasData(userEditor);

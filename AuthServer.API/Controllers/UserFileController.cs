@@ -12,7 +12,6 @@ namespace AuthServer.API.Controllers
     [Authorize]
     public class UserFileController : CustomBaseController
     {
-
         private readonly IGenericService<UserFile, UserFileDto> _genericService;
         private readonly IUserFileService _userFileService;
         private readonly UserManager<UserApp> _userManager;
@@ -27,7 +26,7 @@ namespace AuthServer.API.Controllers
         [HttpGet("[action]/{userId}")]
         public async Task<IActionResult> GetFiles(string userId)
         {
-            //return ActionResultInstance(await _excelDtoService.GetFilesAsync(HttpContext.User.Identity.Name));
+            //return ActionResultInstance(await _userFileService.GetFilesAsync(HttpContext.User.Identity.Name));
             return ActionResultInstance(await _userFileService.GetFilesAsync(userId));
 
         }

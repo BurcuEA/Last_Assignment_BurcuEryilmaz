@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Last_Assignment.Core.Models
+﻿namespace Last_Assignment.Core.Models
 {
     public enum FileStatus
     {
@@ -21,12 +14,8 @@ namespace Last_Assignment.Core.Models
         public string FilePath { get; set; }
         public DateTime? CreatedDate { get; set; }
         public FileStatus FileStatus { get; set; }
-        // public bool FileStatus { get; set; }
-
 
         //[NotMapped]
         public string GetCreatedDate => CreatedDate.HasValue ? CreatedDate.Value.ToShortDateString() : "-";
-
-
     }
 }

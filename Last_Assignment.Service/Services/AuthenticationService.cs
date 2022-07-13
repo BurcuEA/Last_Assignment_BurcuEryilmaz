@@ -11,29 +11,22 @@ using SharedLibrary.Dtos;
 
 namespace Last_Assignment.Service.Services
 {
-    public class AuthenticationService : IAuthenticationService // kendi namespace imizi seçmeliyiz dikkat et ... ÜYELİK sistemi içeren KARAR (C) // ctor kısımları 
+    public class AuthenticationService : IAuthenticationService 
     {
-        private readonly List<Client> _clients; // (D) clientLoginDto
+        private readonly List<Client> _clients; 
         private readonly ITokenService _tokenService;
-
-        private readonly UserManager<UserApp> _userManager; //  ROLE // üyelik sistemi ilgili işlemler,kullanıcı var mı yok mu ..  (C) KAARAR ... User Manager ROLE - AUThentication service 1- 3:29 dk sn ...
-
+        private readonly UserManager<UserApp> _userManager; 
         private readonly IUnitOfWork _unitOfWork;
-
-        //IServie i çağırmıyoruz ,kendisi service zaten... AUThentication service 1- 4:17 dk sn ...
         private readonly IGenericRepository<UserRefreshToken> _userRefreshTokenRepository;
 
-
-        // appsettings ten okuyacağız o yüzden  IOptions<List<Client>> optionsClient kullandı ...
         public AuthenticationService(IOptions<List<Client>> optionsClient, ITokenService tokenService, UserManager<UserApp> userManager,
-            IUnitOfWork unitOfWork, IGenericRepository<UserRefreshToken> userRefreshTokenRepository)  // userRefreshTokenRepositoryyerine userRefreshTokenService kullanımıştı ...
+            IUnitOfWork unitOfWork, IGenericRepository<UserRefreshToken> userRefreshTokenRepository) 
         {
             _clients = optionsClient.Value;
             _tokenService = tokenService;
             _userManager = userManager;
             _unitOfWork = unitOfWork;
             _userRefreshTokenRepository = userRefreshTokenRepository;
-
         }
 
         public async Task<Response<TokenDto>> CreateTokenAsync(LoginDto loginDto)
@@ -42,7 +35,7 @@ namespace Last_Assignment.Service.Services
 
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
-            if (user == null) return Response<TokenDto>.Fail("Email or Password is wrong", 400, true);// Fail ile TokenDto null gidecek zaten ...// 400 client hatası, bizden kaynaklı olsaydı 500 dönerdik ... //  AUThentication service 1- 2:12 dk sn ...
+            if (user == null) return Response<TokenDto>.Fail("Email or Password is wrong", 400, true);
 
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) // password hashleniyor ...
             {
@@ -52,8 +45,6 @@ namespace Last_Assignment.Service.Services
             // Artık bir kullanıcı var o halde token oluşturabiliriz ...
             var token = _tokenService.CreateToken(user);
 
-            // RefreshToken var mı kontrolü... daha önce vermiş miyiz diye ...
-            // SingleOrDefaultAsync varsa gelecek yoksa da null ...
             var userRefreshToken = await _userRefreshTokenRepository.Where(x => x.UserId == user.Id).SingleOrDefaultAsync();
 
             if (userRefreshToken == null)
@@ -74,16 +65,14 @@ namespace Last_Assignment.Service.Services
             await _unitOfWork.CommitAsync();
 
             return Response<TokenDto>.Success(token, 200);
-
         }
 
-        public Response<ClientTokenDto> CreateTokenByClient(ClientLoginDto clientLoginDto) // (D) clientLoginDto
+        public Response<ClientTokenDto> CreateTokenByClient(ClientLoginDto clientLoginDto) 
         {
             var client = _clients.SingleOrDefault(x => x.Id == clientLoginDto.ClientId && x.Secret == clientLoginDto.ClientSecret);
 
             if (client == null)
             {
-                //Async kullanmıyoruz ...
                 return Response<ClientTokenDto>.Fail("Client Id or Client Secret not found", 404, false);
             }
 
@@ -111,7 +100,6 @@ namespace Last_Assignment.Service.Services
 
             var tokenDto = _tokenService.CreateToken(user);
 
-            // bu token içinde hem access token hem de refresh token var ...
             existRefreshToken.Code = tokenDto.RefreshToken;
             existRefreshToken.Expiration = tokenDto.RefreshTokenExpiration;
 
@@ -120,7 +108,6 @@ namespace Last_Assignment.Service.Services
             return Response<TokenDto>.Success(tokenDto, 200);
         }
 
-        // Refresh token nuul yapcaz ki,kullanıcı logout olduğunda  //  AUThentication service 1 de sonlarda ..
         public async Task<Response<NoDataDto>> RevokeRefreshTokenAsync(string refreshToken)
         {
             var existRefreshToken = await _userRefreshTokenRepository.Where(x => x.Code == refreshToken).SingleOrDefaultAsync();
@@ -135,8 +122,6 @@ namespace Last_Assignment.Service.Services
             await _unitOfWork.CommitAsync();
 
             return Response<NoDataDto>.Success(200);
-
-            // 200 ü alırsa başarılı,almazsa bir sıkıntı meydana gelmiş demektir ...
         }
     }
 }
