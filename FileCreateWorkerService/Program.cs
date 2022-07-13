@@ -1,8 +1,8 @@
 using FileCreateWorkerService;
+using FileCreateWorkerService.Models;
 using FileCreateWorkerService.Services;
-using RabbitMQ.Client;
-using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
 using System.Reflection;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -14,22 +14,15 @@ IHost host = Host.CreateDefaultBuilder(args)
 
 
 
-        //services.AddDbContext<AppDbContext>(x =>
-        //{
-           
+        services.AddDbContext<LastAssignmentDBContext>(x =>
+        {
+            x.UseNpgsql(Configuration.GetConnectionString("PostgresSqlServer"), npgsqloption =>
+            {
+                npgsqloption.MigrationsAssembly(Assembly.GetAssembly(typeof(LastAssignmentDBContext)).GetName().Name);
+            });
 
-        //    x.UseNpgsql(Configuration.GetConnectionString("PostgresSqlServer"), npgsqloption =>
-        //    {
-
-        //        npgsqloption.MigrationsAssembly(Assembly.GetAssembly(typeof(AppDbContext)).GetName().Name);
-
-        //    });
-
-        //});
-        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
-
-
+        });
+        //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
         services.AddSingleton<RabbitMQClientService>();
         services.AddSingleton(sp => new ConnectionFactory() { Uri = new Uri(Configuration.GetConnectionString("RabbitMQ")), DispatchConsumersAsync = true });
