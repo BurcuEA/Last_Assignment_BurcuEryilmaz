@@ -16,9 +16,9 @@ namespace AuthServer.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmail(EmailDto request) 
+        public async Task<IActionResult> SendEmail(EmailDto emailRequest) // userFilePath GEREKLİİİ!!!
         {
-            await _emailService.SendEmailAsync(request);
+            await _emailService.SendEmailAsync(emailRequest);
             return Ok();
         }
     }
