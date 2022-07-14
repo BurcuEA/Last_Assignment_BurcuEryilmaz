@@ -4,6 +4,7 @@ using Last_Assignment.Core.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AuthServer.API.Controllers
 {
@@ -23,12 +24,12 @@ namespace AuthServer.API.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("[action]/{userId}")]
-        public async Task<IActionResult> GetFiles(string userId)
-        {
-            //return ActionResultInstance(await _userFileService.GetFilesAsync(HttpContext.User.Identity.Name));
-            return ActionResultInstance(await _userFileService.GetFilesAsync(userId));
+        [HttpGet]
+        public async Task<IActionResult> GetUserFiles()
+        {             
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier); // userId
 
+            return ActionResultInstance(await _userFileService.GetFilesAsync(userIdClaim.Value));
         }
     }
 }
