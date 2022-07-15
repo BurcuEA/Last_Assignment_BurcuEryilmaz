@@ -5,12 +5,12 @@ using FileCreateWorkerService.Quartz;
 using FileCreateWorkerService.Quartz.Configurations;
 using FileCreateWorkerService.Quartz.JobFactory;
 using FileCreateWorkerService.Quartz.Schedular;
-using FileCreateWorkerService.Services;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
 using RabbitMQ.Client;
+using SharedLibrary.Services;
 using System.Reflection;
 
 IHost host = Host.CreateDefaultBuilder(args)
@@ -39,14 +39,15 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
         #region Adding JobType
-        services.AddSingleton<NotificationJob>(); 
+        //services.AddSingleton<NotificationJob>(); 
        services.AddSingleton<SendMailJob>();
         #endregion
 
         #region Adding Jobs 
         List<JobMetadata> jobMetadatas = new List<JobMetadata>();
-        jobMetadatas.Add(new JobMetadata(Guid.NewGuid(), typeof(NotificationJob), "Notify Job", "0/10 * * * * ?"));
-        jobMetadatas.Add(new JobMetadata(Guid.NewGuid(), typeof(SendMailJob), "Log Job", "0/5 * * * * ?"));
+        //jobMetadatas.Add(new JobMetadata(Guid.NewGuid(), typeof(NotificationJob), "Notify Job", "0/10 * * * * ?"));
+        //jobMetadatas.Add(new JobMetadata(Guid.NewGuid(), typeof(SendMailJob), "Log Job", "0/5 * * * * ?"));
+        jobMetadatas.Add(new JobMetadata(Guid.NewGuid(), typeof(SendMailJob), "Send Mail Job", "0/10 * * * * ?"));
 
         services.AddSingleton(jobMetadatas);
         #endregion

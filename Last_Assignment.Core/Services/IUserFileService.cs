@@ -6,7 +6,7 @@ namespace Last_Assignment.Core.Services
 {
     public interface IUserFileService
     {
-        Task<UserFile> CreateUserFileAsync(string userId);
+        Task<UserFile> CreateUserFile(string userId);
         Task<Response<UserFileDto>> GetFilesAsync(string userName);
     }
 }

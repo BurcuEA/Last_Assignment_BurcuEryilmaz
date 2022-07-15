@@ -1,9 +1,7 @@
 ﻿using Last_Assignment.Core.Models;
 using Last_Assignment.Data;
-using Last_Assignment.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SharedLibrary.Dtos;
 
 namespace AuthServer.API.Controllers
 {
@@ -12,12 +10,9 @@ namespace AuthServer.API.Controllers
     public class FilesController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly RabbitMQPublisher _rabbitMQPublisher;
-        //private readonly RabbitMQPublisher_Quartz _rabbitMQPublisherQuartz;
-        public FilesController(AppDbContext context, RabbitMQPublisher rabbitMQPublisher)
+        public FilesController(AppDbContext context)
         {
             _context = context;
-            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
         [HttpPost]
@@ -37,21 +32,7 @@ namespace AuthServer.API.Controllers
             userFile.FileStatus = FileStatus.Completed;
 
             await _context.SaveChangesAsync();
-
-
-
-            #region "Email Publisher // BERY" 
-
-            //var user = await _context.Users.FirstAsync(x => x.Id == userFile.UserId);
-
-            //_rabbitMQPublisher.Publish(new EmailDto() { FileId = userfile.Id });
-            //_rabbitMQPublisher.Publish(new EmailDto() { To = user.Email ,Subject="",Body="" });
-            #endregion
-
-          
-
-
-
+                      
             return Ok();
         }
     }

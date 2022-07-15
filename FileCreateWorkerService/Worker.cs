@@ -1,9 +1,9 @@
 using ClosedXML.Excel;
 using FileCreateWorkerService.Models;
-using FileCreateWorkerService.Services;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using SharedLibrary;
+using SharedLibrary.Services;
 using System.Data;
 using System.Text;
 using System.Text.Json;
@@ -36,7 +36,8 @@ namespace FileCreateWorkerService
         {
             var consumer = new AsyncEventingBasicConsumer(_channel);
 
-            _channel.BasicConsume(RabbitMQClientService.QueueName, false, consumer);
+            //_channel.BasicConsume(RabbitMQClientService.QueueName, false, consumer);
+            _channel.BasicConsume("direct-queue-Excel", false, consumer);
 
             consumer.Received += Consumer_Received;
 

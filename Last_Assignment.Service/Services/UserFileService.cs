@@ -6,6 +6,7 @@ using Last_Assignment.Core.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
 using SharedLibrary;
 using SharedLibrary.Dtos;
+using SharedLibrary.Services;
 
 namespace Last_Assignment.Service.Services
 {
@@ -26,14 +27,15 @@ namespace Last_Assignment.Service.Services
 
         public async Task<Response<UserFileDto>> GetFilesAsync(string userId)
         {
-            var userFile = await CreateUserFileAsync(userId);
+            var userFile = await CreateUserFile(userId);
 
-            _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id }); 
-          
+            _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id },"Excel"); 
+            //_rabbitMQPublisher.Publish(new EmailDto() {  });
+
             return Response<UserFileDto>.Success(ObjectMapper.Mapper.Map<UserFileDto>(userFile), 200);
         }
 
-        public async Task<UserFile> CreateUserFileAsync(string userId)
+        public async Task<UserFile> CreateUserFile(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);   
             var userFile = await _userFileRepository.CreateUserFileAsync(user.Id);

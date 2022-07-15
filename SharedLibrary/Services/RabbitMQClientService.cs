@@ -1,6 +1,7 @@
-﻿using RabbitMQ.Client;
+﻿using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 
-namespace FileCreateWorkerService.Services
+namespace SharedLibrary.Services
 {
     public class RabbitMQClientService : IDisposable
     {
@@ -8,9 +9,11 @@ namespace FileCreateWorkerService.Services
         private IConnection _connection;
         private IModel _channel;
 
-        public static string QueueName = "queue-excel-file";
-
         private readonly ILogger<RabbitMQClientService> _logger;
+
+        public static string ExchangeName = "ExcelDirectExchange";
+        //public static string RoutingKey = ""; //   "excel-route-file 111";
+        //public static string QueueName = "";// "queue-excel-file 111";
 
         public RabbitMQClientService(ConnectionFactory connectionFactory, ILogger<RabbitMQClientService> logger)
         {
@@ -28,6 +31,8 @@ namespace FileCreateWorkerService.Services
             }
 
             _channel = _connection.CreateModel();
+
+            _channel.ExchangeDeclare(ExchangeName, type: "direct", true, false);    //BERY
 
             _logger.LogInformation("RabbitMQ ile bağlantı kuruldu...");
 

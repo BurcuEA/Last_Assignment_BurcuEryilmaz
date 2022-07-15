@@ -10,14 +10,28 @@ namespace SharedLibrary.Services.EmailService
     public class EmailService : IEmailService
     {
         private readonly IConfiguration _config;
+        private readonly RabbitMQPublisher _rabbitMQPublisher;
 
-
-        public EmailService(IConfiguration config)
+        public EmailService(IConfiguration config, RabbitMQPublisher rabbitMQPublisher)
         {
             _config = config;
+            _rabbitMQPublisher = rabbitMQPublisher;
         }
 
-        public async Task SendEmailAsync(EmailDto mailRequest)
+        public async Task<Response<NoDataDto>> SendEmailAsync(EmailDto mailRequest)
+        {
+            await CreateEmail(mailRequest);
+
+
+            // _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id });
+           _rabbitMQPublisher.Publish(new EmailDto() {To=mailRequest.To,Body=mailRequest.Body,Subject=mailRequest.Subject },"Email");
+
+            //return Response<EmailDto>.Success(200);
+            return Response<NoDataDto>.Success(200);
+        }
+
+
+        public async Task CreateEmail(EmailDto mailRequest)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_config.GetSection("Email:Username").Value));
@@ -29,7 +43,7 @@ namespace SharedLibrary.Services.EmailService
             //var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files", userFile.FilePath);
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/files", "report-excel-fd3afdf-ee.xlsx"); // userFilePath GEREKLİ !!!
 
-            var attachment = new MimePart() 
+            var attachment = new MimePart()
             {
                 Content = new MimeContent(File.OpenRead(path)),
                 ContentDisposition = new ContentDisposition(ContentDisposition.Attachment),
@@ -37,7 +51,6 @@ namespace SharedLibrary.Services.EmailService
                 FileName = Path.GetFileName(path)
             };
 
-          
             var multipart = new Multipart("mixed");
 
             multipart.Add(body);
@@ -51,5 +64,8 @@ namespace SharedLibrary.Services.EmailService
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }
+
+
+
     }
 }

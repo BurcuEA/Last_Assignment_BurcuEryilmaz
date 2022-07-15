@@ -19,6 +19,12 @@ namespace AuthServer.API.Controllers
         public async Task<IActionResult> SendEmail(EmailDto emailRequest) // userFilePath GEREKLİİİ!!!
         {
             await _emailService.SendEmailAsync(emailRequest);
+
+
+          //    //_rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id });
+          //_rabbitMQPublisher.Publish(new EmailDto() {  });
+
+
             return Ok();
         }
     }

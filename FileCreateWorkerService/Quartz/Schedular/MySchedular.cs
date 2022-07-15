@@ -16,7 +16,7 @@ namespace FileCreateWorkerService.Quartz.Schedular
         //private readonly RabbitMQClientService _rabbitMQClientService;
         //private IModel _channel;
 
-        public MySchedular(ISchedulerFactory schedulerFactory, List<JobMetadata> jobMetadatas, IJobFactory jobFactory, RabbitMQClientService rabbitMQClientService)
+        public MySchedular(ISchedulerFactory schedulerFactory, List<JobMetadata> jobMetadatas, IJobFactory jobFactory)
         {
             _jobFactory = jobFactory;
             _schedulerFactory = schedulerFactory;
