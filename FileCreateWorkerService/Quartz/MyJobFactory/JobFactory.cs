@@ -20,7 +20,6 @@ namespace FileCreateWorkerService.Quartz.JobFactory
             var jobDetail = bundle.JobDetail;
             return (IJob)service.GetService(jobDetail.JobType);
         }
-
         public void ReturnJob(IJob job)
         {
 
