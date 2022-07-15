@@ -17,7 +17,8 @@ namespace FileCreateWorkerService.Quartz.JobFactory
         }
         public IJob NewJob(TriggerFiredBundle bundle, IScheduler scheduler)
         {
-            var jobDetail = bundle.JobDetail;
+            var jobDetail = bundle.JobDetail;                       
+
             return (IJob)service.GetService(jobDetail.JobType);
         }
         public void ReturnJob(IJob job)

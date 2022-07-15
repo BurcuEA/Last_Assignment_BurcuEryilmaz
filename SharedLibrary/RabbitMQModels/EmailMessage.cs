@@ -1,6 +1,6 @@
-﻿namespace SharedLibrary.Dtos
+﻿namespace SharedLibrary.RabbitMQModels
 {
-    public class EmailDto
+    public class EmailMessage
     {
         public string To { get; set; } = string.Empty;
         public string Subject { get; set; } = string.Empty;

@@ -1,5 +1,4 @@
 ﻿using FileCreateWorkerService.Quartz.Configurations;
-using FileCreateWorkerService.Services;
 using Quartz;
 using Quartz.Spi;
 //using RabbitMQ.Client;
@@ -13,15 +12,11 @@ namespace FileCreateWorkerService.Quartz.Schedular
         private readonly List<JobMetadata> _jobMetadatas;
         private readonly ISchedulerFactory _schedulerFactory;
 
-        //private readonly RabbitMQClientService _rabbitMQClientService;
-        //private IModel _channel;
-
         public MySchedular(ISchedulerFactory schedulerFactory, List<JobMetadata> jobMetadatas, IJobFactory jobFactory)
         {
             _jobFactory = jobFactory;
             _schedulerFactory = schedulerFactory;
             _jobMetadatas = jobMetadatas;
-            //_rabbitMQClientService = rabbitMQClientService;
         }
         public async Task StartAsync(CancellationToken cancellationToken)
         {
@@ -40,14 +35,7 @@ namespace FileCreateWorkerService.Quartz.Schedular
                 Scheduler.ScheduleJob(jobDetail, trigger, cancellationToken).GetAwaiter();
                 //Start The Schedular
             });
-            //await Scheduler.Start(cancellationToken);
-
-
-
-            //_channel = _rabbitMQClientService.Connect();
-            //_channel.BasicQos(0, 1, false);
-
-            //return base.StartAsync(cancellationToken);
+           
             await Scheduler.Start(cancellationToken);
         }
 

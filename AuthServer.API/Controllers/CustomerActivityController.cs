@@ -11,7 +11,7 @@ namespace AuthServer.API.Controllers
     [ApiController]
     public class CustomerActivityController : CustomBaseController
     {
-        private readonly IGenericService<CustomerActivity, CustomerActivityDto> _genericService; //_customerActivityService;
+        private readonly IGenericService<CustomerActivity, CustomerActivityDto> _genericService; 
         private readonly ICustomerActivityService _customerActivityService;
         public CustomerActivityController(IGenericService<CustomerActivity, CustomerActivityDto> genericService, ICustomerActivityService customerActivityService)
         {

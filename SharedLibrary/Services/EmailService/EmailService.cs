@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using MimeKit;
 using MimeKit.Text;
 using SharedLibrary.Dtos;
+using SharedLibrary.RabbitMQModels;
 
 namespace SharedLibrary.Services.EmailService
 {
@@ -18,20 +19,16 @@ namespace SharedLibrary.Services.EmailService
             _rabbitMQPublisher = rabbitMQPublisher;
         }
 
-        public async Task<Response<NoDataDto>> SendEmailAsync(EmailDto mailRequest)
+        public async Task<Response<NoDataDto>> SendEmailAsync(EmailMessage mailRequest)
         {
             await CreateEmail(mailRequest);
 
+           _rabbitMQPublisher.Publish(new EmailMessage() {To=mailRequest.To,Body=mailRequest.Body,Subject=mailRequest.Subject },"Email");
 
-            // _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id });
-           _rabbitMQPublisher.Publish(new EmailDto() {To=mailRequest.To,Body=mailRequest.Body,Subject=mailRequest.Subject },"Email");
-
-            //return Response<EmailDto>.Success(200);
             return Response<NoDataDto>.Success(200);
         }
 
-
-        public async Task CreateEmail(EmailDto mailRequest)
+        public async Task CreateEmail(EmailMessage mailRequest)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_config.GetSection("Email:Username").Value));
@@ -64,8 +61,5 @@ namespace SharedLibrary.Services.EmailService
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }
-
-
-
     }
 }

@@ -11,10 +11,7 @@ namespace SharedLibrary.Services
 
         private readonly ILogger<RabbitMQClientService> _logger;
 
-        public static string ExchangeName = "ExcelDirectExchange";
-        //public static string RoutingKey = ""; //   "excel-route-file 111";
-        //public static string QueueName = "";// "queue-excel-file 111";
-
+        public static string ExchangeName = "ExcelMailDirectExchange";        
         public RabbitMQClientService(ConnectionFactory connectionFactory, ILogger<RabbitMQClientService> logger)
         {
             _connectionFactory = connectionFactory;
@@ -32,7 +29,7 @@ namespace SharedLibrary.Services
 
             _channel = _connection.CreateModel();
 
-            _channel.ExchangeDeclare(ExchangeName, type: "direct", true, false);    //BERY
+            _channel.ExchangeDeclare(ExchangeName, type: "direct", true, false);
 
             _logger.LogInformation("RabbitMQ ile bağlantı kuruldu...");
 

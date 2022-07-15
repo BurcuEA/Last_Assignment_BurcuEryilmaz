@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SharedLibrary.Dtos;
+using SharedLibrary.RabbitMQModels;
 using SharedLibrary.Services.EmailService;
 
 namespace AuthServer.API.Controllers
@@ -16,14 +16,9 @@ namespace AuthServer.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendEmail(EmailDto emailRequest) // userFilePath GEREKLİİİ!!!
+        public async Task<IActionResult> SendEmail(EmailMessage emailRequest) // userFilePath GEREKLİİİ!!!
         {
             await _emailService.SendEmailAsync(emailRequest);
-
-
-          //    //_rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id });
-          //_rabbitMQPublisher.Publish(new EmailDto() {  });
-
 
             return Ok();
         }

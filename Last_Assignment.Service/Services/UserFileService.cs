@@ -4,8 +4,8 @@ using Last_Assignment.Core.Repositories;
 using Last_Assignment.Core.Services;
 using Last_Assignment.Core.UnitOfWork;
 using Microsoft.AspNetCore.Identity;
-using SharedLibrary;
 using SharedLibrary.Dtos;
+using SharedLibrary.RabbitMQModels;
 using SharedLibrary.Services;
 
 namespace Last_Assignment.Service.Services
@@ -30,8 +30,7 @@ namespace Last_Assignment.Service.Services
             var userFile = await CreateUserFile(userId);
 
             _rabbitMQPublisher.Publish(new CreateExcelMessage() { FileId = userFile.Id },"Excel"); 
-            //_rabbitMQPublisher.Publish(new EmailDto() {  });
-
+          
             return Response<UserFileDto>.Success(ObjectMapper.Mapper.Map<UserFileDto>(userFile), 200);
         }
 

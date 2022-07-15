@@ -2,7 +2,8 @@ using ClosedXML.Excel;
 using FileCreateWorkerService.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using SharedLibrary;
+using SharedLibrary.Dtos.ExcelReportsDtos;
+using SharedLibrary.RabbitMQModels;
 using SharedLibrary.Services;
 using System.Data;
 using System.Text;
@@ -86,7 +87,7 @@ namespace FileCreateWorkerService
 
         private DataTable GetTable(string tableName)
         {
-            List<ReportListDto> reportList;
+            List<GeneralReportListDto> reportList;
 
             using (var scope = _serviceProvider.CreateScope())
             {
@@ -95,7 +96,7 @@ namespace FileCreateWorkerService
                 reportList = (from cust in context.Customers
                               join custAct in context.CustomerActivities on cust.Id equals custAct.CustomerId
                               group custAct by new { cust.Id, cust.Name, cust.Surname, cust.PhoneNumber } into grp
-                              select new ReportListDto()
+                              select new GeneralReportListDto()
                               {
                                   CustomerId = grp.Key.Id,
                                   Name = grp.Key.Name,

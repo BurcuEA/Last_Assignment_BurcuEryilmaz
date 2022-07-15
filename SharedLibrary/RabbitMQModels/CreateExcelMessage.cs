@@ -1,4 +1,4 @@
-﻿namespace SharedLibrary
+﻿namespace SharedLibrary.RabbitMQModels
 {
     public class CreateExcelMessage
     {
