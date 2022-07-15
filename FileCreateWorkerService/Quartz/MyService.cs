@@ -1,25 +1,14 @@
-﻿using ClosedXML.Excel;
-using FileCreateWorkerService.Models;
-using FileCreateWorkerService.Services;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using SharedLibrary;
-using SharedLibrary.Dtos;
-using System.Data;
-using System.Text;
-using System.Text.Json;
-
-namespace FileCreateWorkerService.Quartz
+﻿namespace FileCreateWorkerService.Quartz
 {
     internal class MyService : BackgroundService  // EmailWorker olarak değişecek
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                Console.WriteLine($"My Service is running at {DateTime.Now}");
-                await Task.Delay(2000, stoppingToken);
-            }
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    Console.WriteLine($"My Service is running at EMAIL {DateTime.Now}");
+            //    await Task.Delay(2000, stoppingToken);
+            //}
         }
     }
 

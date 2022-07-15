@@ -15,13 +15,11 @@ namespace AuthServer.API.Controllers
     {
         private readonly IGenericService<UserFile, UserFileDto> _genericService;
         private readonly IUserFileService _userFileService;
-        private readonly UserManager<UserApp> _userManager;
 
-        public UserFileController(IGenericService<UserFile, UserFileDto> genericService,IUserFileService userFileService, UserManager<UserApp> userManager)
+        public UserFileController(IGenericService<UserFile, UserFileDto> genericService,IUserFileService userFileService)
         {
             _genericService = genericService;
             _userFileService = userFileService;
-            _userManager = userManager;
         }
 
         [HttpGet]
