@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthServer.API.Controllers
 {
-    [Authorize] 
+    //[Authorize] 
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : CustomBaseController
@@ -20,24 +20,28 @@ namespace AuthServer.API.Controllers
             _customerService = customerService;
         }
 
+        [Authorize("Admin,Editor")]
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
             return ActionResultInstance(await _genericService.GetAllAsync());
         }
 
+        [Authorize("Admin,Editor")]
         [HttpPost]
         public async Task<IActionResult> SaveCustomer(CustomerDto customerDto)
         {
             return ActionResultInstance(await _genericService.AddAsync(customerDto));
         }
 
+        [Authorize("Admin,Editor")]
         [HttpPut]
         public async Task<IActionResult> UpdateCustomer(CustomerDto customerDto)
         {
             return ActionResultInstance(await _genericService.UpdateAsync(customerDto, customerDto.Id));
         }
 
+        [Authorize("Admin")]
         //api/customer/2
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
@@ -45,6 +49,7 @@ namespace AuthServer.API.Controllers
             return ActionResultInstance(await _genericService.Remove(id));
         }
 
+        [Authorize("Admin,Editor")]
         [HttpGet("[action]/{customerId}")]
         public async Task<IActionResult> GetSingleCustomerByIdWithCustomerActivities(int customerId)  
         {

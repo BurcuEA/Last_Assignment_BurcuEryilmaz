@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthServer.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerActivityController : CustomBaseController
@@ -19,30 +19,35 @@ namespace AuthServer.API.Controllers
             _customerActivityService = customerActivityService;
         }
 
+        [Authorize("Admin,Editor")]
         [HttpGet]
         public async Task<IActionResult> GetCustomerActivities()
         {
             return ActionResultInstance(await _genericService.GetAllAsync());
         }
 
+        [Authorize("Admin,Editor")]
         [HttpPost]
         public async Task<IActionResult> SaveCustomerActivity(CustomerActivityDto customerActivityDto)
         {
             return ActionResultInstance(await _genericService.AddAsync(customerActivityDto));
         }
 
+        [Authorize("Admin,Editor")]
         [HttpPut]
         public async Task<IActionResult> UpdateCustomerActivity(CustomerActivityDto customerActivityDto)
         {
             return ActionResultInstance(await _genericService.UpdateAsync(customerActivityDto, customerActivityDto.Id));
         }
 
+        [Authorize("Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomerActivity(int id)
         {
             return ActionResultInstance(await _genericService.Remove(id));
         }
 
+        [Authorize("Admin,Editor")]
         [HttpGet("[action]")]
         public async Task<IActionResult> GetCustomerActivityWithCustomer()
         {
